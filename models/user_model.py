@@ -1,8 +1,8 @@
 # Operaciones con la base de datos (CRUD)
-
 from db import get_db
 from utils.helpers import serialize_row
 from werkzeug.security import generate_password_hash
+
 
 def get_all_users():
     _, cursor = get_db()
@@ -47,3 +47,10 @@ def delete_user(user_id):
     deleted = cursor.fetchone()
     db.commit()
     return serialize_row(deleted) if deleted else None
+
+
+def get_user_by_email(email: str):
+    _, cursor = get_db()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    row = cursor.fetchone()
+    return serialize_row(row) if row else None

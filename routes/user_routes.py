@@ -11,6 +11,7 @@ from schemas.user_schema import UserCreate, UserUpdate
 
 user_bp = Blueprint("user_bp", __name__, url_prefix="/api/users")
 
+
 def validation_error_response(errors):
     return jsonify({"message": "Error de validación", "errors": errors}), 422
 
